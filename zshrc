@@ -66,7 +66,7 @@ alias nre="nr release"
 # Custom Directory Functions
 # -------------------------------- #
 function p() { 
-  cd "$HOME/Project/$1"
+  cd "$HOME/Projects/$1"
 }
 
 function mkcd() {
