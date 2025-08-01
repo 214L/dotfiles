@@ -56,6 +56,7 @@ home_file_paths=(
     "$HOME/.zshrc"
     "$HOME/.zshenv"
     "$HOME/.zprofile"
+    "$HOME/.bash_profile"
     # Add more full paths to home dotfiles here, e.g.:
     # "$HOME/.gitconfig"
 )
@@ -63,6 +64,7 @@ repo_file_names=(
     "zshrc"
     "zshenv"
     "zprofile"
+    "bash_profile"
     # Add corresponding repo names here, e.g.:
     # "gitconfig"
 )
