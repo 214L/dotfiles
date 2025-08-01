@@ -1,1 +1,5 @@
 .DS_Store
+
+# Local environment variables (contain sensitive data)
+env
+local_env
