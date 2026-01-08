@@ -58,6 +58,7 @@ home_file_paths=(
     "$HOME/.zprofile"
     "$HOME/.bash_profile"
     "$HOME/.local/bin/env"
+    "$HOME/.codex/config.toml"
     # Add more full paths to home dotfiles here, e.g.:
     # "$HOME/.gitconfig"
 )
@@ -67,6 +68,7 @@ repo_file_names=(
     "zprofile"
     "bash_profile"
     "env"
+    "codex/config.toml"
     # Add corresponding repo names here, e.g.:
     # "gitconfig"
 )
@@ -162,6 +164,50 @@ for (( i=0; i<num_files; i++ )); do
   fi
   echo "----------------------------------------"
 done
+
+# --- CodeX auth.json Generation ---
+echo "----------------------------------------"
+echo "Processing CodeX authentication configuration..."
+
+CODEX_DIR="$HOME/.codex"
+AUTH_JSON_PATH="$CODEX_DIR/auth.json"
+
+# 确保 .codex 目录存在
+if [ ! -d "$CODEX_DIR" ]; then
+    echo "  Creating $CODEX_DIR directory..."
+    mkdir -p "$CODEX_DIR"
+fi
+
+# 从 env 文件中读取 CODEX_OPENAI_API_KEY
+# 注意：env 文件应该已经通过符号链接被加载到 ~/.local/bin/env
+ENV_FILE="$HOME/.local/bin/env"
+
+if [ -f "$ENV_FILE" ]; then
+    # 临时 source env 文件以获取环境变量
+    source "$ENV_FILE"
+
+    if [ -n "$CODEX_OPENAI_API_KEY" ]; then
+        echo "  Generating $AUTH_JSON_PATH from environment variable..."
+
+        # 生成 auth.json 文件
+        cat > "$AUTH_JSON_PATH" << EOF
+{
+  "OPENAI_API_KEY": "$CODEX_OPENAI_API_KEY"
+}
+EOF
+
+        echo "  Successfully generated auth.json"
+    else
+        echo "  WARNING: CODEX_OPENAI_API_KEY not found in $ENV_FILE"
+        echo "  Please add the following line to your env file:"
+        echo "  export CODEX_OPENAI_API_KEY=\"your-api-key-here\""
+    fi
+else
+    echo "  WARNING: Environment file $ENV_FILE not found."
+    echo "  Please ensure the env file is properly linked."
+fi
+
+echo "----------------------------------------"
 
 echo "Script execution finished."
 echo "Please check the output above for any errors and confirm that symbolic links were created correctly."

@@ -3,3 +3,6 @@
 # Local environment variables (contain sensitive data)
 env
 local_env
+
+# CodeX sensitive files
+codex/auth.json
