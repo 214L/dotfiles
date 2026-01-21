@@ -59,6 +59,9 @@ home_file_paths=(
     "$HOME/.bash_profile"
     "$HOME/.local/bin/env"
     "$HOME/.codex/config.toml"
+    "$HOME/.config/opencode/oh-my-opencode.json"
+    "$HOME/.config/opencode/opencode.json"
+    "$HOME/.config/opencode/plugin/codex-proxy-plugin.ts"
     # Add more full paths to home dotfiles here, e.g.:
     # "$HOME/.gitconfig"
 )
@@ -69,6 +72,9 @@ repo_file_names=(
     "bash_profile"
     "env"
     "codex/config.toml"
+    "opencode/oh-my-opencode.json"
+    "opencode/opencode.json"
+    "opencode/plugin/codex-proxy-plugin.ts"
     # Add corresponding repo names here, e.g.:
     # "gitconfig"
 )
@@ -145,6 +151,11 @@ for (( i=0; i<num_files; i++ )); do
   # The file must exist in the repository to create a symlink.
   if [ -f "$repo_file_path_abs" ]; then
     echo "  Preparing to create/update symbolic link at $home_file_path pointing to $repo_file_path_abs"
+    home_parent_dir=$(dirname "$home_file_path")
+    if [ ! -d "$home_parent_dir" ]; then
+        echo "  Creating parent directory $home_parent_dir ..."
+        mkdir -p "$home_parent_dir"
+    fi
     # Remove any existing file or symlink at the target home directory location.
     # This ensures a clean symlink creation.
     if [ -L "$home_file_path" ] || [ -f "$home_file_path" ]; then

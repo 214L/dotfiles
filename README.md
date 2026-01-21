@@ -10,6 +10,7 @@ A minimal dotfiles repository for managing shell configurations across multiple 
 - **Project management**: VS Code integration and directory shortcuts
 - **Secure environment variables**: Local config management with git exclusion
 - **CodeX integration**: Automated CodeX configuration with secure API key management
+- **OpenCode integration**: Managed OpenCode config and plugins
 
 ## Quick Start
 
@@ -112,6 +113,14 @@ CodeX configuration is automatically managed with secure API key handling:
 - Sensitive data → `env` file (git-ignored)
 - Auth file → Generated automatically from env
 
+### OpenCode Configuration
+
+OpenCode configuration is managed alongside the dotfiles:
+
+- `opencode/opencode.json` → `~/.config/opencode/opencode.json`
+- `opencode/oh-my-opencode.json` → `~/.config/opencode/oh-my-opencode.json`
+- `opencode/plugin/codex-proxy-plugin.ts` → `~/.config/opencode/plugin/codex-proxy-plugin.ts`
+
 ## Project Structure
 
 ```
@@ -123,8 +132,13 @@ dotfiles/
 ├── zprofile               # System config
 ├── bash_profile           # Bash config
 ├── env                    # Local environment (git-ignored)
-└── codex/
-    └── config.toml        # CodeX configuration
+├── codex/
+│   └── config.toml        # CodeX configuration
+└── opencode/
+    ├── opencode.json      # OpenCode configuration
+    ├── oh-my-opencode.json # oh-my-opencode settings
+    └── plugin/
+        └── codex-proxy-plugin.ts # OpenCode plugin
 ```
 
 ## Customization
