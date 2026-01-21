@@ -93,3 +93,12 @@ function codep() {
     echo "codep: missing project directory argument for 'pd'" >&2
   fi
 }
+
+
+# bun completions
+[ -s "/Users/aierc/.bun/_bun" ] && source "/Users/aierc/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+export PATH="/Users/aierc/.bun/bin:$PATH"
